@@ -1,0 +1,35 @@
+import { useState } from "react";
+
+export default function App() {
+  const list = [
+    { id: 0, name: "thalis", age: 24 },
+    { id: 0, name: "Carol", age: 25 }
+  ];
+
+  const [search, setSearch] = useState("");
+
+  function handleSearch(e) {
+    setSearch(e.target.value);
+  }
+
+  const filteredData = list.filter((item) => {
+    return item.name.toLowerCase().includes(search.toLowerCase());
+  });
+
+  return (
+    <div className="App">
+      <input
+        placeholder="Filter"
+        value={search}
+        onChange={handleSearch}
+      ></input>
+
+      {filteredData.map((item) => (
+        <>
+          <p key={item.id}>Name: {item.name} </p>
+          <p>Age: {item.age}</p>
+        </>
+      ))}
+    </div>
+  );
+}
